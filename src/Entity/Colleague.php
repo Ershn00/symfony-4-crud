@@ -1,18 +1,14 @@
-<?php
+<?php /** @noinspection PhpPropertyOnlyWrittenInspection */
 
 namespace App\Entity;
 
 use App\Repository\ColleagueRepository;
 use Doctrine\ORM\Mapping as ORM;
 use DateTime;
-use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=ColleagueRepository::class)
  * @ORM\Table(name="colleagues")
- * @vich\Uploadable
  */
 class Colleague
 {
@@ -37,13 +33,6 @@ class Colleague
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
-
-    /**
-     * @ORM\Column(nullable=true)
-     * @Vich\UploadableField(mapping="colleague_image", fileNameProperty="image")
-     * @var File
-     */
-    private $imageFile;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -101,18 +90,6 @@ class Colleague
         $this->image = $image;
 
         return $this;
-    }
-
-    /** @return File|null */
-    public function getImageFile(): ?File
-    {
-        return $this->imageFile;
-    }
-
-    /** @param File|null $imageFile */
-    public function setImageFile(?File $imageFile=null)
-    {
-        $this->imageFile = $imageFile;
     }
 
     public function getNotes(): ?string

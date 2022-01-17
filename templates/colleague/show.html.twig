@@ -3,7 +3,7 @@
 {% block title %}Colleague{% endblock %}
 
 {% block body %}
-    <h1>Colleague</h1>
+    <h1 class="mt-5">Colleague</h1>
 
     <table class="table">
         <tbody>
@@ -21,7 +21,7 @@
             </tr>
             <tr>
                 <th>Picture</th>
-                <td>{{ colleague.image }}</td>
+                <td><img src="{{ asset(image_dir ~ colleague.image) }}" width="300" alt=""></td>
             </tr>
             <tr>
                 <th>Notes</th>
@@ -34,11 +34,11 @@
         </tbody>
     </table>
 
-    <a href="{{ path('colleague_index') }}">back to list</a>
+    <a class="btn btn-primary" href="{{ path('colleague_index') }}" role="button">Back to list</a>
 
-    <a href="{{ path('send_greeting', {'name': colleague.name, 'email': colleague.email}) }}">Send Greeting!</a>
+    <a class="btn btn-success" href="{{ path('send_greeting', {'name': colleague.name, 'email': colleague.email}) }}" role="button">Send Greeting!</a>
 
-    <a href="{{ path('colleague_edit', {'id': colleague.id}) }}">edit</a>
+    <a class="btn btn-warning" href="{{ path('colleague_edit', {'id': colleague.id}) }}" role="button">Edit</a>
 
-    {{ include('colleague/_delete_form.html.twig') }}
+    <p>{{ include('colleague/_delete_form.html.twig') }}</p>
 {% endblock %}

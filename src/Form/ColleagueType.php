@@ -4,9 +4,9 @@ namespace App\Form;
 
 use App\Entity\Colleague;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ColleagueType extends AbstractType
 {
@@ -15,10 +15,10 @@ class ColleagueType extends AbstractType
         $builder
             ->add('name')
             ->add('email')
-            //->add('image')
-            ->add('imageFile', VichImageType::class, array(
-                'required'      => false,
-            ))
+            ->add('image', FileType::class, [
+                'mapped' => false,
+                'required' => false,
+            ])
             ->add('notes')
         ;
     }

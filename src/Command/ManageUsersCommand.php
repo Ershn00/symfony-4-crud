@@ -66,7 +66,9 @@ class ManageUsersCommand extends Command
 
         $io->success('Success! You have saved the information for '.$name.','.$email.','.$notes.' in the database.');
 
-        return 0;
+        dd($newColleague);
+
+        //return 0;
     }
 
     /**

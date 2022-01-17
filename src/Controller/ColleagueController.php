@@ -39,6 +39,19 @@ class ColleagueController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $uploaded_file = $request->files->get('colleague')['image'];
+            $uploads_directory = $this->getParameter('uploads_directory');
+            if($uploaded_file != null) {
+                $uploaded_filename = md5(uniqid()) . '.' . $uploaded_file->guessExtension();
+                $uploaded_file->move(
+                    $uploads_directory,
+                    $uploaded_filename
+                );
+                $colleague->setImage($uploaded_filename);
+            }
+
+            //var_dump($uploaded_file); die;
+
             $entityManager->persist($colleague);
             $entityManager->flush();
 
@@ -70,6 +83,16 @@ class ColleagueController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $uploaded_file = $request->files->get('colleague')['image'];
+            $uploads_directory = $this->getParameter('uploads_directory');
+            if($uploaded_file != null) {
+                $uploaded_filename = md5(uniqid()) . '.' . $uploaded_file->guessExtension();
+                $uploaded_file->move(
+                    $uploads_directory,
+                    $uploaded_filename
+                );
+                $colleague->setImage($uploaded_filename);
+            }
             $entityManager->flush();
 
             return $this->redirectToRoute('colleague_index', [], Response::HTTP_SEE_OTHER);
