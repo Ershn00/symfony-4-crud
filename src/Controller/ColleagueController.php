@@ -83,6 +83,7 @@ class ColleagueController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //$colleague->setImage('');
             $uploaded_file = $request->files->get('colleague')['image'];
             $uploads_directory = $this->getParameter('uploads_directory');
             if($uploaded_file != null) {
@@ -131,7 +132,12 @@ class ColleagueController extends AbstractController
 
         $mailer->send($email);
 
+        //dd($email);
+
         $this->addFlash('success', 'Greeting Email Sent to '.$name.'!');
+
+        //Return for functional test MailerTest.php
+        //return new Response();
 
         return $this->redirectToRoute('colleague_index');
     }

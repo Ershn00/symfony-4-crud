@@ -5,30 +5,39 @@
 {% block body %}
     <h1 class="mt-5">Colleague index</h1>
 
+    <br />
+    {% include 'flash_messages.html.twig' %}
+
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>Picture</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Picture</th>
                 <th>Notes</th>
-                <th>Created_at</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for colleague in colleagues %}
             <tr>
-                <td>{{ colleague.id }}</td>
-                <td>{{ colleague.name }}</td>
-                <td>{{ colleague.email }}</td>
-                <td>{{ colleague.image }}</td>
-                <td>{{ colleague.notes }}</td>
-                <td>{{ colleague.createdAt ? colleague.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                {% if colleague.image is defined and colleague.image is not null %}
+                    <td><img src="{{ asset(image_dir ~ colleague.image) }}" width="50" alt=""></td>
+                {% else %}
+                    <td>N/a</td>
+                {% endif %}
+                <td>{{ colleague.name | default("N/a") }}</td>
+                <td>{{ colleague.email | default("N/a") }}</td>
+                <td class="text-truncate" style="max-width: 300px;"><span>{{ colleague.notes | default("N/a") }}</span></td>
                 <td>
-                    <a href="{{ path('colleague_show', {'id': colleague.id}) }}">show</a>
-                    <a href="{{ path('colleague_edit', {'id': colleague.id}) }}">edit</a>
+                    <table>
+                        <tr>
+                            <td><a class="btn btn-primary btn-sm" href="{{ path('colleague_show', {'id': colleague.id}) }}">Details</a></td>
+                            <td><a class="btn btn-warning btn-sm" href="{{ path('colleague_edit', {'id': colleague.id}) }}">Edit</a></td>
+                            <td>{{ include('colleague/_delete_form.html.twig') }}</td>
+                            <td><a class="btn btn-success btn-sm" href="{{ path('send_greeting', {'name': colleague.name, 'email': colleague.email}) }}" role="button">Send Greeting!</a></td>
+                        </tr>
+                    </table>
                 </td>
             </tr>
         {% else %}
@@ -39,5 +48,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('colleague_new') }}">Create new</a>
+    <a class="btn btn-success" href="{{ path('colleague_new') }}">Create new</a>
 {% endblock %}

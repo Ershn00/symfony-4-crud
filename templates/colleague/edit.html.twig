@@ -5,9 +5,23 @@
 {% block body %}
     <h1 class="mt-5">Edit Colleague</h1>
 
+    <h5>Required Fields:</h5>
+    <ul>
+        <li>Name</li>
+        <li>Email</li>
+    </ul>
+
     {{ include('colleague/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('colleague_index') }}">back to list</a>
+    <br />
 
-    {{ include('colleague/_delete_form.html.twig') }}
+    <table>
+        <tr>
+            <td><a class="btn btn-primary btn-sm" href="{{ path('colleague_index') }}">Back to list</a></td>
+            <td>{{ include('colleague/_delete_form.html.twig') }}</td>
+        </tr>
+    </table>
+
+
+
 {% endblock %}

@@ -1,5 +1,12 @@
 {{ form_start(form) }}
+
+    {% if colleague.image is not null %}
+        <h5>Uploaded Image:</h5>
+        <img height="80" alt="No Image" src="{{ asset(image_dir ~ colleague.image) }}" class="img img-responsive img-preview thumbnail" style="margin-bottom: 20px;"/>
+    {% endif %}
+
     {{ form_widget(form) }}
+
 <br />
     <button class="btn btn-outline-primary">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

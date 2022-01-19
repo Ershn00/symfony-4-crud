@@ -83,10 +83,13 @@ class Colleague
 
     /**
      * @param string|null image
-     * @return $this
      */
     public function setImage(string $image): self
     {
+        if ($image === '') {
+            $image = null;
+        }
+
         $this->image = $image;
 
         return $this;
@@ -99,6 +102,10 @@ class Colleague
 
     public function setNotes(string $notes): self
     {
+        if ($notes === '') {
+            $notes = null;
+        }
+
         $this->notes = $notes;
 
         return $this;
