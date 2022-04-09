@@ -1,4 +1,4 @@
-# coddict-codingexercise
+# codingexercise
 
 Symfony 4.4
 PHP version: 7.4
